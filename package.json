@@ -10,7 +10,16 @@
     "test": "jest"
   },
   "dependencies": {
-    "@nextui-org/react": "^2.2.9",
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/next-js": "^2.2.0",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/open-sans": "^5.0.20",
+    "@fontsource/raleway": "^5.0.16",
+    "@fontsource/slackey": "^5.0.18",
+    "@nextui-org/system": "^2.0.15",
+    "@nextui-org/theme": "^2.1.17",
     "framer-motion": "^10.16.16",
     "next": "14.0.4",
     "react": "^18",
