@@ -1,13 +1,14 @@
-'use client'
-import { Box, Heading, Text } from '@chakra-ui/react'
+import { buttonVariants } from "@/components/ui/button"
+// import link from next
+import Link from "next/link"
+import { Hero } from "@/components/ui/hero"
+
+
 
 export default function Home() {
   return (
-    <Box textAlign="center" mt={10}>
-      <Heading as="h1" size="xl" mb={4}>
-        Tanner Hornsby
-      </Heading>
-      <Text fontSize="xl">Full-Stack Engineer</Text>
-    </Box>
+    <div className='flex flex-col items-center justify-center min-h-screen -mt-24'>
+      <Hero/>
+    </div>
   )
 }
