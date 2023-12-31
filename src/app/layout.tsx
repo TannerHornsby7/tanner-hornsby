@@ -2,6 +2,7 @@ import "@/styles/globals.css"
 import { Inter as FontSans } from "next/font/google"
 import Providers from "./providers"
 import Nav from "@/components/ui/nav"
+import { Toaster } from "@/components/ui/toaster"
 
 import { cn } from "@/lib/utils"
 
@@ -10,7 +11,7 @@ export const fontSans = FontSans({
   variable: "--font-sans",
 })
 
-export default function RootLayout({ children }:{ children: React.ReactNode}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
@@ -21,8 +22,11 @@ export default function RootLayout({ children }:{ children: React.ReactNode}) {
         )}
       >
         <Providers>
-        <Nav/>
-        {children}
+          <Nav />
+          <main>
+            {children}
+          </main>
+          <Toaster />
         </Providers>
       </body>
     </html>

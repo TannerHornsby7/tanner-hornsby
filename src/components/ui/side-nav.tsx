@@ -14,32 +14,25 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { buttonVariants } from "@/components/ui/button"
 import Link from "next/link"
-// import align justify from lucide
 import { AlignJustify } from "lucide-react"
-
-
-/*
-<Sheet>
-                <SheetTrigger>Nav</SheetTrigger>
-                <SheetContent>
-                    <SheetHeader>
-                    <SheetTitle className='flex w-full justify-center'>Navigation</SheetTitle>
-                    <Separator />
-                    <SheetDescription className='flex flex-col'>
-                        <Button className='w-full' variant={'ghost'}>Home</Button>
-                        <Button className='w-full' variant={'ghost'}>About</Button>
-                        <Button className='w-full' variant={'ghost'}>Projects</Button>
-                        <Button className='w-full' variant={'ghost'}>Contact Me</Button>
-                    </SheetDescription>
-                    </SheetHeader>
-                </SheetContent>
-                </Sheet>
-*/
-
-// create a react component that takes a list of links and renders the above code
-// make sure to add the correct links to the list
+// as a client component, get the current url and use it to determine which
+// navigation link should be active with next router
+// 1. get the current url
+// 2. determine which link should be active
+// 3. render the links
+// 4. render the side navigation
+import { usePathname } from 'next/navigation'
 
 export function SideNavigation({links}: {links: {name: string, href: string}[]}) {
+    // get the current pathname from next/navigation
+    const pathname = usePathname()
+    // determine which link should be active
+    const activeLink = links.find((link) => link.href == pathname)
+
+    if (!activeLink) {
+        throw new Error(`No link found for pathname: ${pathname}`)
+    }
+
     return (
         <Sheet>
             <SheetTrigger>
@@ -52,7 +45,7 @@ export function SideNavigation({links}: {links: {name: string, href: string}[]})
                 <SheetDescription className='flex flex-col'>
                     {links.map((link) => {
                         return (
-                            <Link key={link.href} className={buttonVariants({ variant: "ghost" })} href={link.href}> {link.name} </Link>
+                            <SheetClose key={link.href} asChild><Link className={(link.href == activeLink.href ? buttonVariants({ variant: "default" }) : buttonVariants({ variant: "ghost" }))} href={link.href}>{link.name}</Link></SheetClose>
                         )
                     })}
                 </SheetDescription>
