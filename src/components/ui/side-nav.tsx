@@ -30,7 +30,7 @@ export function SideNavigation({links}: {links: {name: string, href: string}[]})
     const activeLink = links.find((link) => link.href == pathname)
 
     if (!activeLink) {
-        throw new Error(`No link found for pathname: ${pathname}`)
+        return <></>
     }
 
     return (
