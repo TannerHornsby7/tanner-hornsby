@@ -13,13 +13,14 @@ import { useTheme } from "next-themes"
 import '@fontsource/slackey/400.css'
 import { Project as P } from '@/app/projects/page'
 import * as React from 'react'
+import type { MouseEventHandler, MouseEvent } from 'react'
 
 export function ProjectList({projects, setProj}: {projects: P[], setProj: Function}) {
 
     const {theme, systemTheme} = useTheme()
     const [accordianProj, setAccordianProj] = React.useState<string | null>(null)
 
-    const handleAccordianTrig = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const handleAccordianTrig: MouseEventHandler<HTMLButtonElement> = (e: MouseEvent<HTMLButtonElement>) => {
         setAccordianProj(e.currentTarget.textContent)
     }
 
@@ -28,7 +29,7 @@ export function ProjectList({projects, setProj}: {projects: P[], setProj: Functi
         if (accordianProj) {
             setProj(accordianProj)
         }
-    }, [accordianProj])
+    }, [accordianProj, setProj])
 
     return (
         <div className='flex flex-col items-center min-h-screen justify-start'>

@@ -44,7 +44,7 @@ const projects = [
         height: 1100,
         width: 2182,
         gif: 'https://giphy.com/embed/aYqejHeTkJko5SsQsk',
-        multiplier: 1.08
+        multiplier: .7
 
     },
     // {
@@ -60,7 +60,7 @@ const projects = [
     // },
     {
         name: 'Ray Tracer',
-        description: 'This is a description for project 3',
+        description: 'A ray tracing engine built with racket for my first computer science course at The University of Chicago. Throughout the project, I learned test driven development and functional programming.',
         images: [],
         repo: 'https://github.com/TannerHornsby7/ray-tracer',
         height: 1,
@@ -81,25 +81,29 @@ export default function Projects() {
     const [width, setWidth] = useState<number>(0)
     const [height, setHeight] = useState<number>(0)
 
+    const setWH = () => {
+        const cP = project_map.get(currentProject)
+        if (cP === undefined) {
+            return
+        }
+        const width_height_sum = (cP.height + cP.width) | 1
+        const width_multiplier = cP.width / width_height_sum
+        const height_multiplier = cP.height / width_height_sum
+        setHeight(Math.max(window.innerWidth * height_multiplier * cP.multiplier, 360 * cP.height / cP.width))
+        setWidth(Math.max(window.innerWidth * width_multiplier * cP.multiplier, 360))
+    }
+
     // get the width and height of the window
     useEffect(() => {
-        const cP = project_map.get(currentProject)
-        const width_height_sum = (cP?.height + cP?.width) | 1
-        const width_multiplier = cP?.width / width_height_sum
-        const height_multiplier = cP?.height / width_height_sum
-        setHeight(window.innerWidth * height_multiplier * cP?.multiplier)
-        setWidth(window.innerWidth * width_multiplier * cP?.multiplier)
-    }, [currentProject])
+        setWH()
+    }, [currentProject, setWH])
 
-    // trigger on resize as well
-    window.addEventListener('resize', () => {
-        const cP = project_map.get(currentProject)
-        const width_height_sum = (cP?.height + cP?.width) | 1
-        const width_multiplier = cP?.width / width_height_sum
-        const height_multiplier = cP?.height / width_height_sum
-        setHeight(window.innerWidth * height_multiplier * cP?.multiplier)
-        setWidth(window.innerWidth * width_multiplier * cP?.multiplier)
-    })
+    if (typeof window !== 'undefined') {
+        // trigger on resize as well
+        window.addEventListener('resize', () => {
+            setWH()
+        })
+    }
 
 
     return (
