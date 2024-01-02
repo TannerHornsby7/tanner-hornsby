@@ -15,7 +15,7 @@ export default function About() {
                 <h1 className='p-4 text-left' style={{fontFamily:'Slackey'}}>About</h1>
                 <Separator />
             </div>}
-            description={<p className='text-left'>I am a full-stack software engineer.</p>}
+            description={<p className='text-left'>I am a Computer Science Major at the Univserity of Chicago. I like web development, computational statistics, and signal analysis.</p>}
             footer={
                 <div className="w-full flex justify-start">
                     <Link className={buttonVariants({ variant: "ghost" })} href={`resume.pdf`} download><Download className='h-3 -ml-2'/>resume</Link>
